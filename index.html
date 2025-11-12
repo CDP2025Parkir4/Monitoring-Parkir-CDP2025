@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Monitoring Parkir</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+        <header>
+            <div class="isiHeader">
+                <div class="title-row">
+                    <svg class="lucide lucide-map-pin w-10 h-10" fill="none" height="24" stroke="currentColor"
+                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                        </path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <h1>Parking Lot Monitoring</h1>
+                </div>
+                <p>Cari spot parkir tersedia secara real-time</p>
+                <div class="kolomPencarian">
+                    <svg class="lucide lucide-search absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5"
+                        fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </svg>
+                    <input id="search-input" type="text" placeholder="Cari lokasi parkir yang diinginkan"
+                        aria-label="Cari lokasi parkir">
+                </div>
+            </div>
+        </header>
+
+        <div class="konten">
+
+            <section class="grid-cards">
+                
+                <article class="card" data-lot-id="filkom">
+                    <div class="parking-lot-pictures"><img src="pictures/filkom.png" alt=""></div>
+                    <div class="card-top">
+                        <h3>Parkiran Filkom</h3>
+                        <div class="avail ok">
+                            <span class="count" id="count-filkom">0</span>
+                            <small>available</small>
+                        </div>
+                    </div>
+                    <div class="card-meta">
+                        <div class="row">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 22s7-7.75 7-13a7 7 0 1 0-14 0c0 5.25 7 13 7 13z" />
+                                <circle cx="12" cy="9" r="2.5" />
+                            </svg>
+                            <span>Gedung Utama Filkom</span>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="fill warn" style="--p:50;"></div>
+                    </div>
+                    <button class="btn" href="\pages\parkiran_filkom\parkiran_filkom.html">View Details</button>
+                </article>
+
+                <article class="card" data-lot-id="fisip">
+                    <div class="parking-lot-pictures"><img src="pictures/filkom.png" alt=""></div>
+                    <div class="card-top">
+                        <h3>Parkiran Fisip</h3>
+                        <div class="avail warn">
+                            <span class="count">45</span>
+                            <small>of 200 free</small>
+                        </div>
+                    </div>
+                    <div class="card-meta">
+                        <div class="row">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 22s7-7.75 7-13a7 7 0 1 0-14 0c0 5.25 7 13 7 13z" />
+                                <circle cx="12" cy="9" r="2.5" />
+                            </svg>
+                            <span>Jl. Fisip</span>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="fill warn" style="--p:35;"></div>
+                    </div>
+                    <button href="\pages\parkiran_fisip\parkiran_fisip.html"class="btn">View Details</button>
+                </article>
+
+                <article class="card" data-lot-id="sakri">
+                    <div class="parking-lot-pictures"><img src="pictures/filkom.png" alt=""></div>
+                    <div class="card-top">
+                        <h3>Samantha Krida</h3>
+                        <div class="avail ok">
+                            <span class="count">67</span>
+                            <small>of 100 free</small>
+                        </div>
+                    </div>
+                    <div class="card-meta">
+                        <div class="row">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 22s7-7.75 7-13a7 7 0 1 0-14 0c0 5.25 7 13 7 13z" />
+                                <circle cx="12" cy="9" r="2.5" />
+                            </svg>
+                            <span>Gedung Samantha Krida</span>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="fill ok" style="--p:67;"></div>
+                    </div>
+                    <button class="btn" href="\pages\parkiran_sakri\parkiran_sakri.html">View Details</button>
+                </article>
+
+                <article class="card" data-lot-id="ftp">
+                    <div class="parking-lot-pictures"><img src="pictures/FTP_f.png" alt=""></div>
+                    <div class="card-top">
+                        <h3>Fakultas Teknologi Pertanian</h3>
+                        <div class="avail ok">
+                            <span class="count">67</span>
+                            <small>of 100 free</small>
+                        </div>
+                    </div>
+                    <div class="card-meta">
+                        <div class="row">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 22s7-7.75 7-13a7 7 0 1 0-14 0c0 5.25 7 13 7 13z" />
+                                <circle cx="12" cy="9" r="2.5" />
+                            </svg>
+                            <span>Gedung F</span>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="fill ok" style="--p:67;"></div>
+                    </div>
+                    <button class="btn" href="\pages\parkiran_ftp\parkiran_ftp.html">View Details</button>
+                </article>
+
+                <article class="card" data-lot-id="fK">
+                    <div class="parking-lot-pictures"><img src="pictures/filkom.png" alt=""></div>
+                    <div class="card-top">
+                        <h3>Fakultas Kedokteran</h3>
+                        <div class="avail ok">
+                            <span class="count">67</span>
+                            <small>of 100 free</small>
+                        </div>
+                    </div>
+                    <div class="card-meta">
+                        <div class="row">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 22s7-7.75 7-13a7 7 0 1 0-14 0c0 5.25 7 13 7 13z" />
+                                <circle cx="12" cy="9" r="2.5" />
+                            </svg>
+                            <span>Gedung Kuliah Bersama FK</span>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="fill ok" style="--p:67;"></div>
+                    </div>
+                    <button class="btn">View Details</button>
+                </article>
+
+                <article class="card" data-lot-id="feb1">
+                    <div class="parking-lot-pictures"><img src="pictures/FEB_d.png" alt=""></div>
+                    <div class="card-top">
+                        <h3>Fakultas Ekonomi Bisnis (D)</h3>
+                        <div class="avail ok">
+                            <span class="count">67</span>
+                            <small>of 100 free</small>
+                        </div>
+                    </div>
+                    <div class="card-meta">
+                        <div class="row">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 22s7-7.75 7-13a7 7 0 1 0-14 0c0 5.25 7 13 7 13z" />
+                                <circle cx="12" cy="9" r="2.5" />
+                            </svg>
+                            <span>Gedung D FEB</span>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="fill ok" style="--p:67;"></div>
+                    </div>
+                    <button class="btn">View Details</button>
+                </article>
+
+                <article class="card" data-lot-id="feb2">
+                    <div class="parking-lot-pictures"><img src="pictures/FEB_rektorat lama.png" alt=""></div>
+                    <div class="card-top">
+                        <h3>Fakultas Ekonomi Bisnis (E)</h3>
+                        <div class="avail ok">
+                            <span class="count">67</span>
+                            <small>of 100 free</small>
+                        </div>
+                    </div>
+                    <div class="card-meta">
+                        <div class="row">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 22s7-7.75 7-13a7 7 0 1 0-14 0c0 5.25 7 13 7 13z" />
+                                <circle cx="12" cy="9" r="2.5" />
+                            </svg>
+                            <span>Dekanat Lama/Gedung E FEB</span>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="fill ok" style="--p:67;"></div>
+                    </div>
+                    <button class="btn">View Details</button>
+                </article>
+
+                <article class="card" data-lot-id="dummy">
+                    <div class="parking-lot-pictures"><img src="pictures/filkom.png" alt=""></div>
+                    <div class="card-top">
+                        <h3>Dummy</h3>
+                        <div class="avail ok">
+                            <span class="count">67</span>
+                            <small>of 100 free</small>
+                        </div>
+                    </div>
+                    <div class="card-meta">
+                        <div class="row">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 22s7-7.75 7-13a7 7 0 1 0-14 0c0 5.25 7 13 7 13z" />
+                                <circle cx="12" cy="9" r="2.5" />
+                            </svg>
+                            <span>Dummy</span>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="fill ok" style="--p:67;"></div>
+                    </div>
+                    <button class="btn">View Details</button>
+                </article>
+            </section>
+
+
+        </div>
+        <script type="module" src="home.js"></script>
+        <script src="app.js"></script>
+    </body>
+
+</html>

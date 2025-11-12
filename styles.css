@@ -1,0 +1,197 @@
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+header {
+    background: linear-gradient(to bottom right, hsl(220, 97%, 60%), hsl(216, 52%, 94%));
+    color: white;
+    padding: 3rem 1rem;
+
+    margin: auto;
+}
+
+.isiHeader{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100rem;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0;
+
+}
+
+svg {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+header p {
+    margin-bottom: 1.5rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    margin: 0;
+    margin-bottom: 1.5rem;
+}
+
+.kolomPencarian {
+    position: relative;
+    /* agar posisi absolut SVG mengacu ke sini */
+    width: 100%;
+    max-width: 600px;
+    /* opsional, supaya tidak terlalu lebar */
+    margin-top: 1rem;
+    border-width: 1px;
+}
+
+.kolomPencarian svg {
+    position: absolute;
+    left: 12px;
+    /* jarak ikon dari sisi kiri */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    stroke: #999;
+    pointer-events: none;
+    /* biar klik fokus ke input, bukan SVG */
+}
+
+.kolomPencarian input {
+    width: 100%;
+    height: 3.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    padding: 0.5rem 1rem 0.5rem 3rem;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.konten {
+    padding: 1rem 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100rem;
+}
+
+.grid-cards{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+.card{
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.04);
+  padding: 16px;
+  flex: 1 1 320px;
+  max-width: 16rem;
+}
+
+.card .parking-lot-pictures{
+  margin: -16px -16px 12px;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+}
+
+.card .parking-lot-pictures img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.card-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:.75rem;
+}
+
+.card h3{
+  margin:0;
+  font-size:1.05rem;
+  font-weight:700;
+  color:#111827;
+}
+
+.card .avail{
+  text-align:right;
+  line-height:1;
+}
+.card .avail .count{
+  font-weight:700;
+  font-size:1.1rem;
+  display:block;
+}
+.avail.warn .count{ color:#f59e0b; }  
+.avail.ok   .count{ color:#22c55e; }    
+.avail small{
+  color:#6b7280;
+}
+
+.card-meta{
+  margin-top:.5rem;
+  color:#6b7280;
+  font-size:.9rem;
+}
+.card-meta .row{
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  margin:.35rem 0;
+}
+.card-meta svg{
+  width:16px; height:16px;
+  stroke:#6b7280; fill:none;
+  stroke-width:2;
+}
+
+.progress{
+  height:8px;
+  background:#e5e7eb;
+  border-radius:999px;
+  margin:.75rem 0 1rem;
+  overflow:hidden;
+}
+.fill{
+  height:100%;
+  width: calc(var(--p,0) * 1%);
+  border-radius:inherit;
+  background:#6366f1;
+}
+.fill.warn{ background:#f59e0b; }
+.fill.ok{   background:#22c55e; }
+
+.btn{
+  width:100%;
+  border:none;
+  border-radius:8px;
+  height:36px;
+  font-size:.9rem;
+  color:#fff;
+  background:#6366f1;
+  cursor:pointer;
+}
+.btn:hover{ filter: brightness(1.05); }

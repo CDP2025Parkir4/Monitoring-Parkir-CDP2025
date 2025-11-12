@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+        <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Parkiran FTP</title>
+                <link rel="stylesheet" href="parkiran_ftp.css">
+        </head>
+
+        <body>
+                <header class="topbar">
+                        <a class="back" href="../../index.html" aria-label="Kembali">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                        </a>
+                        <div class="titles">
+                                <h1>Parkiran FTP</h1>
+                                <p>Gedung F</p>
+                        </div>
+                </header>
+
+                <main class="container">
+                        <div class="card stat-card">
+                                <div class="stat-number" id="availableCount">0</div>
+                                <div class="stat-label">Available Spots</div>
+                        </div>
+
+                        <section class="card layout-card">
+                                <div class="layout-head">
+                                        <h2>Layout</h2>
+                                </div>
+                                <div class="spots-grid" id="spotsGrid">
+                                        <!-- A1 – A20 (semua mengikuti struktur tombol A1) -->
+                                        <!-- Komponen ikon mobil -->
+                                        <!-- (salin struktur yang sama untuk semua tombol, hanya ubah data-id & label) -->
+
+                                        <button class="spot available" data-id="A1"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A1</span></button>
+
+                                        <button class="spot available" data-id="A2"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A2</span></button>
+
+                                        <button class="spot available" data-id="A3"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A3</span></button>
+
+                                        <button class="spot available" data-id="A4"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A4</span></button>
+
+                                        <button class="spot available" data-id="A5"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A5</span></button>
+
+                                        <button class="spot available" data-id="A6"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A6</span></button>
+
+                                        <button class="spot available" data-id="A7"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A7</span></button>
+
+                                        <button class="spot available" data-id="A8"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A8</span></button>
+
+                                        <button class="spot available" data-id="A9"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A9</span></button>
+
+                                        <button class="spot available" data-id="A10"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A10</span></button>
+
+                                        <button class="spot available" data-id="A11"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A11</span></button>
+
+                                        <button class="spot available" data-id="A12"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A12</span></button>
+
+                                        <button class="spot available" data-id="A13"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A13</span></button>
+
+                                        <button class="spot available" data-id="A14"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A14</span></button>
+
+                                        <button class="spot available" data-id="A15"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A15</span></button>
+
+                                        <button class="spot available" data-id="A16"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A16</span></button>
+
+                                        <button class="spot available" data-id="A17"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A17</span></button>
+
+                                        <button class="spot available" data-id="A18"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A18</span></button>
+
+                                        <button class="spot available" data-id="A19"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A19</span></button>
+
+                                        <button class="spot available" data-id="A20"><span class="car"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-car w-3 h-3">
+                                                                <path
+                                                                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
+                                                                </path>
+                                                                <circle cx="7" cy="17" r="2"></circle>
+                                                                <path d="M9 17h6"></path>
+                                                                <circle cx="17" cy="17" r="2"></circle>
+                                                        </svg></span><span class="code">A20</span></button>
+                                </div>
+
+                                <div class="legend">
+                                        <span class="legend-item">
+                                                <span class="dot dot-available"></span> Available
+                                        </span>
+                                        <span class="legend-item">
+                                                <span class="dot dot-occupied"></span> Occupied
+                                        </span>
+                                </div>
+                        </section>
+                </main>
+                <script type="module" src="parkiran_ftp.js"></script>
+        </body>
+
+</html>
