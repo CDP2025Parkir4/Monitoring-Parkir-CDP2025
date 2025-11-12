@@ -1,6 +1,13 @@
 // store.js
 const LS_KEY = 'parkingState';
 const CHANNEL = new BroadcastChannel('parking-sync');
+const LOCAL_EVENT = 'parking-state-updated';
+
+function notifyLocal(updatedAt) {
+  if (typeof window === 'undefined') return;
+  const event = new CustomEvent(LOCAL_EVENT, { detail: { updatedAt } });
+  window.dispatchEvent(event);
+}
 
 const LOT_BLUEPRINTS = {
   filkom: { name: 'Parkiran Filkom', spots: 20 },
@@ -76,8 +83,8 @@ function loadState() {
 function saveState(state) {
   state.updatedAt = Date.now();
   localStorage.setItem(LS_KEY, JSON.stringify(state));
-  // informasikan ke halaman lain
   CHANNEL.postMessage({ type: 'state:updated', updatedAt: state.updatedAt });
+  notifyLocal(state.updatedAt);
 }
 
 export function getState() {
@@ -106,12 +113,94 @@ export function getAvailableCount(lotId) {
 }
 
 export function subscribe(onUpdate) {
-  // dipanggil ketika state berubah dari halaman lain
-  CHANNEL.onmessage = (e) => {
-    if (e.data?.type === 'state:updated') onUpdate?.();
-  };
-  // fallback kalau BroadcastChannel tidak ada (opsional):
-  window.addEventListener('storage', (e) => {
-    if (e.key === LS_KEY) onUpdate?.();
+  const handler = () => onUpdate?.();
+  CHANNEL.addEventListener('message', (e) => {
+    if (e.data?.type === 'state:updated') handler();
   });
+  window.addEventListener('storage', (e) => {
+    if (e.key === LS_KEY) handler();
+  });
+  window.addEventListener(LOCAL_EVENT, handler);
+}
+
+function normalizeStatus(status) {
+  const text = String(status ?? '').trim().toLowerCase();
+  if (['occupied', 'penuh', 'terisi', 'full', 'taken'].includes(text)) return 'occupied';
+  return 'available';
+}
+
+function normalizeLotId(entry, fallback) {
+  return entry?.location || entry?.lotId || entry?.lot || fallback || null;
+}
+
+function normalizeSlotId(entry) {
+  return entry?.slotId || entry?.slot || entry?.id || null;
+}
+
+function collectUpdates(payload, inheritedLot) {
+  if (Array.isArray(payload)) {
+    return payload.reduce((acc, item) => {
+      acc.push(...collectUpdates(item, inheritedLot));
+      return acc;
+    }, []);
+  }
+  if (!payload || typeof payload !== 'object') return [];
+  const lotId = normalizeLotId(payload, inheritedLot);
+  if (Array.isArray(payload.slots)) {
+    return payload.slots
+      .map((slotEntry) => {
+        if (!slotEntry || typeof slotEntry !== 'object') return null;
+        return {
+          lotId: normalizeLotId(slotEntry, lotId),
+          slotId: normalizeSlotId(slotEntry),
+          status: slotEntry?.status ?? slotEntry?.state,
+        };
+      })
+      .filter(Boolean)
+      .filter((item) => item.lotId && item.slotId);
+  }
+  const slotId = normalizeSlotId(payload);
+  if (lotId && slotId) {
+    return [{
+      lotId,
+      slotId,
+      status: payload.status ?? payload.state,
+    }];
+  }
+  return [];
+}
+
+function ensureLotRecord(state, lotId) {
+  if (!state.lots[lotId]) {
+    const blueprint = LOT_BLUEPRINTS[lotId];
+    state.lots[lotId] = {
+      name: blueprint?.name ?? lotId,
+      spots: blueprint ? createSpots(blueprint.spots) : {},
+    };
+  }
+  if (!state.lots[lotId].spots) {
+    state.lots[lotId].spots = {};
+  }
+  return state.lots[lotId];
+}
+
+export function applyRemoteSnapshot(payload) {
+  const updates = collectUpdates(payload);
+  if (!updates.length) return;
+  const state = loadState();
+  let mutated = false;
+
+  updates.forEach(({ lotId, slotId, status }) => {
+    if (!lotId || !slotId) return;
+    const lot = ensureLotRecord(state, lotId);
+    const normalized = normalizeStatus(status);
+    if (lot.spots[slotId] !== normalized) {
+      lot.spots[slotId] = normalized;
+      mutated = true;
+    }
+  });
+
+  if (mutated) {
+    saveState(state);
+  }
 }

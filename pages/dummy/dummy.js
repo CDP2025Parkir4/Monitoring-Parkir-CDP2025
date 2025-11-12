@@ -1,4 +1,5 @@
 // pages/parkiran_filkom/app.js
+import '../../realtime.js';
 import { getState, toggleSpot, getAvailableCount, subscribe } from '../../data/store.js';
 const LOT_ID = 'dummy';
 

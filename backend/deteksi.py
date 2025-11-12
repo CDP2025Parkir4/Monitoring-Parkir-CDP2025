@@ -5,6 +5,7 @@ sys.path.append(r'E:\Programming\web\Capstone Design\ZAKI\yolov5')
 import torch
 import cv2
 import json
+import socketio
 from yolov5.models.common import DetectMultiBackend
 from yolov5.utils.torch_utils import select_device
 from yolov5.utils.general import non_max_suppression, scale_boxes
@@ -14,9 +15,10 @@ from yolov5.utils.augmentations import letterbox
 # KONFIGURASI
 # ==============================
 MODEL_PATH = r"E:\Programming\web\Capstone Design\MODEL\copilot\yolov5s.pt"
-VIDEO_PATH = r"E:\Programming\web\Capstone Design\FOOTAGE\sakri3.mp4"
-SLOTS_JSON = r"E:\Programming\web\Capstone Design\MAPPING\sakri3.json"
-OUTPUT_PATH = r'E:\Programming\web\Capstone Design\OUTPUT\copilot\sakri3.mp4'
+VIDEO_PATH = r"E:\Programming\web\Capstone Design\FOOTAGE\kedokteran2.mp4"
+SLOTS_JSON = r"E:\Programming\web\Capstone Design\MAPPING\kedokteran2.json"
+OUTPUT_PATH = r'E:\Programming\web\Capstone Design\OUTPUT\copilot\kedokteran2222.mp4'
+LOT_ID = 'dummy'
 IMG_SIZE = 640
 CONF_THRES = 0.45
 IOU_THRES = 0.45
@@ -26,6 +28,10 @@ DETECT_THRESHOLD = 2     # min frame berturut-turut untuk deteksi terisi
 MISS_THRESHOLD = 90       # min frame berturut-turut untuk deteksi kosong
 OCCUPIED_TIME = 0.04      # detik minimal untuk lock "terisi"
 EMPTY_TIME = 3        # detik minimal untuk lock "kosong"
+# --- Socket config ---
+SOCKET_URL = 'http://localhost:5000'
+SOCKET_EVENT = 'detector_update'
+EMIT_INTERVAL = 1.0  # detik minimal antar kirim snapshot
 # ==============================
 
 # --- Load slot JSON ---
@@ -93,6 +99,46 @@ slot_status = {
     } for name in slots
 }
 
+# --- Socket.IO client ---
+sio = socketio.Client(reconnection=True, logger=False, engineio_logger=False)
+
+@sio.event
+def connect():
+    print("🔌 Socket.IO detector connected:", sio.sid)
+
+@sio.event
+def disconnect():
+    print("⚠️ Socket.IO detector disconnected")
+
+def ensure_socket_connected():
+    if sio.connected:
+        return
+    try:
+        sio.connect(SOCKET_URL, transports=['websocket'])
+    except Exception as exc:
+        print(f"❌ Gagal konek ke Socket.IO ({SOCKET_URL}): {exc}")
+
+def emit_slot_snapshot():
+    if not sio.connected:
+        ensure_socket_connected()
+        if not sio.connected:
+            return
+    payload = {
+        "location": LOT_ID,
+        "slots": [
+            {
+                "slotId": slot_name,
+                "status": "occupied" if str(data["status"]).lower() == "terisi" else "available"
+            }
+            for slot_name, data in slot_status.items()
+        ],
+        "timestamp": time.time()
+    }
+    try:
+        sio.emit(SOCKET_EVENT, payload)
+    except Exception as exc:
+        print(f"⚠️ Gagal mengirim snapshot parkir: {exc}")
+
 # --- FPS counter initialization ---
 last_time = time.time()
 fps = 0.0
@@ -139,6 +185,8 @@ class WriterWorker(threading.Thread):
 # --- Start async writer ---
 writer = WriterWorker(out, max_queue=64)
 writer.start()
+ensure_socket_connected()
+last_emit_time = 0.0
 
 # ==============================
 # LOOP UTAMA
@@ -223,6 +271,10 @@ while cap.isOpened():
         cv2.putText(write_frame, f"{name}: {s['status']}", (sx1, sy1 - 10),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
 
+    if current_time - last_emit_time >= EMIT_INTERVAL:
+        emit_slot_snapshot()
+        last_emit_time = current_time
+
     # --- Calculate FPS ---
     current_time = time.time()
     dt = current_time - last_time
@@ -255,3 +307,5 @@ cap.release()
 out.release()
 cv2.destroyAllWindows()
 print(f"✅ Hasil deteksi stabil disimpan ke: {OUTPUT_PATH}")
+if sio.connected:
+    sio.disconnect()

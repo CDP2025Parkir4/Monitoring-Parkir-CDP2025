@@ -1,5 +1,6 @@
 // home.js
 import { getState, subscribe } from './data/store.js'; // sesuaikan path
+import './realtime.js';
 
 const lotCards = Array.from(document.querySelectorAll('.grid-cards .card'))
   .map((card) => ({
