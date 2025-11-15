@@ -1,12 +1,37 @@
 // store.js
 const LS_KEY = 'parkingState';
-const CHANNEL = new BroadcastChannel('parking-sync');
 const LOCAL_EVENT = 'parking-state-updated';
+const IS_BROWSER = typeof window !== 'undefined' && typeof document !== 'undefined';
+
+function createChannel() {
+  if (!IS_BROWSER || typeof BroadcastChannel !== 'function') return null;
+  try {
+    return new BroadcastChannel('parking-sync');
+  } catch (err) {
+    console.warn('[store] BroadcastChannel unavailable, falling back to local events only:', err);
+    return null;
+  }
+}
+
+const CHANNEL = createChannel();
+
+function createLocalEvent(updatedAt) {
+  if (!IS_BROWSER) return null;
+  if (typeof window.CustomEvent === 'function') {
+    return new CustomEvent(LOCAL_EVENT, { detail: { updatedAt } });
+  }
+  if (typeof document.createEvent === 'function') {
+    const event = document.createEvent('CustomEvent');
+    event.initCustomEvent(LOCAL_EVENT, false, false, { updatedAt });
+    return event;
+  }
+  return null;
+}
 
 function notifyLocal(updatedAt) {
-  if (typeof window === 'undefined') return;
-  const event = new CustomEvent(LOCAL_EVENT, { detail: { updatedAt } });
-  window.dispatchEvent(event);
+  if (!IS_BROWSER) return;
+  const event = createLocalEvent(updatedAt);
+  if (event) window.dispatchEvent(event);
 }
 
 const LOT_BLUEPRINTS = {
@@ -83,7 +108,7 @@ function loadState() {
 function saveState(state) {
   state.updatedAt = Date.now();
   localStorage.setItem(LS_KEY, JSON.stringify(state));
-  CHANNEL.postMessage({ type: 'state:updated', updatedAt: state.updatedAt });
+  CHANNEL?.postMessage({ type: 'state:updated', updatedAt: state.updatedAt });
   notifyLocal(state.updatedAt);
 }
 
@@ -114,13 +139,17 @@ export function getAvailableCount(lotId) {
 
 export function subscribe(onUpdate) {
   const handler = () => onUpdate?.();
-  CHANNEL.addEventListener('message', (e) => {
-    if (e.data?.type === 'state:updated') handler();
-  });
-  window.addEventListener('storage', (e) => {
-    if (e.key === LS_KEY) handler();
-  });
-  window.addEventListener(LOCAL_EVENT, handler);
+  if (CHANNEL) {
+    CHANNEL.addEventListener('message', (e) => {
+      if (e.data?.type === 'state:updated') handler();
+    });
+  }
+  if (IS_BROWSER) {
+    window.addEventListener('storage', (e) => {
+      if (e.key === LS_KEY) handler();
+    });
+    window.addEventListener(LOCAL_EVENT, handler);
+  }
 }
 
 function normalizeStatus(status) {

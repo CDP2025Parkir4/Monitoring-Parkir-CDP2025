@@ -32,10 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = e.target.closest('.spot');
     if (!btn) return;
     const code = btn.dataset.id;
-    toggleSpot(LOT_ID, code);     // update state + broadcast
-    // sinkronkan UI lokal cepat:
-    btn.classList.toggle('available');
-    btn.classList.toggle('occupied');
+    try {
+      toggleSpot(LOT_ID, code); // update state + broadcast
+    } catch (err) {
+      console.error('[dummy] toggleSpot failed:', err);
+    }
+    // Force re-hydrate so UI selalu pakai state terbaru.
+    hydrateButtons();
     renderCount();
   });
 

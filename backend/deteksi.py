@@ -11,9 +11,7 @@ from yolov5.utils.torch_utils import select_device
 from yolov5.utils.general import non_max_suppression, scale_boxes
 from yolov5.utils.augmentations import letterbox
 
-# ==============================
 # KONFIGURASI
-# ==============================
 MODEL_PATH = r"E:\Programming\web\Capstone Design\MODEL\copilot\yolov5s.pt"
 VIDEO_PATH = r"E:\Programming\web\Capstone Design\FOOTAGE\kedokteran2.mp4"
 SLOTS_JSON = r"E:\Programming\web\Capstone Design\MAPPING\kedokteran2.json"
@@ -32,7 +30,6 @@ EMPTY_TIME = 3        # detik minimal untuk lock "kosong"
 SOCKET_URL = 'http://localhost:5000'
 SOCKET_EVENT = 'detector_update'
 EMIT_INTERVAL = 1.0  # detik minimal antar kirim snapshot
-# ==============================
 
 # --- Load slot JSON ---
 with open(SLOTS_JSON, "r") as f:

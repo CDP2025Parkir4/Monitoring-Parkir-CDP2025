@@ -1,5 +1,5 @@
 import '../../realtime.js';
-import { getState, toggleSpot, getAvailableCount, subscribe } from '../../data/store.js';
+import { getState, getAvailableCount, subscribe } from '../../data/store.js';
 const LOT_ID = 'ftp';
 
 function renderCount() {
@@ -25,18 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // set tampilan awal
   hydrateButtons();
   renderCount();
-
-  // interaksi toggle
-  document.getElementById('spotsGrid')?.addEventListener('click', (e) => {
-    const btn = e.target.closest('.spot');
-    if (!btn) return;
-    const code = btn.dataset.id;
-    toggleSpot(LOT_ID, code);     // update state + broadcast
-    // sinkronkan UI lokal cepat:
-    btn.classList.toggle('available');
-    btn.classList.toggle('occupied');
-    renderCount();
-  });
 
   // kalau ada update dari halaman lain, refresh UI
   subscribe(() => {

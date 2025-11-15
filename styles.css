@@ -105,13 +105,14 @@ header p {
   box-shadow: 0 2px 10px rgba(0,0,0,.04);
   padding: 16px;
   flex: 1 1 320px;
-  max-width: 16rem;
+  max-width: 20rem;
 }
 
 .card .parking-lot-pictures{
   margin: -16px -16px 12px;
   border-radius: 10px 10px 0 0;
   overflow: hidden;
+  aspect-ratio: 16 / 9; /* keep preview size consistent */
 }
 
 .card .parking-lot-pictures img{
